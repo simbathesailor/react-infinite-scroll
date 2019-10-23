@@ -1,5 +1,5 @@
 {
-  "name": "react-infinite-scroll",
+  "name": "@simbathesailor/react-infinite-scroll",
   "version": "0.1.0",
   "license": "MIT",
   "author": "simbathesailor",
@@ -16,7 +16,7 @@
     "lint": "tsdx lint"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16.8.6"
   },
   "husky": {
     "hooks": {
@@ -39,5 +39,23 @@
     "tsdx": "^0.10.5",
     "tslib": "^1.10.0",
     "typescript": "^3.6.4"
-  }
+  },
+  "description": "A dead simple infinite-scroll react library",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simbathesailor/react-infinite-scroll.git"
+  },
+  "keywords": [
+    "react",
+    "infinite-scroll",
+    "intersection-observer"
+  ],
+  "bugs": {
+    "url": "https://github.com/simbathesailor/react-infinite-scroll/issues"
+  },
+  "homepage": "https://github.com/simbathesailor/react-infinite-scroll#readme"
 }
