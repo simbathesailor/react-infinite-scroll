@@ -104,4 +104,8 @@ function App() {
   );
 }
 
+/**
+ * Need to update the scroll area lazy loading
+ */
+
 ReactDOM.render(<App />, document.getElementById('root'));
