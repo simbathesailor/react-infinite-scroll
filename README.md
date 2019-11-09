@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-  <img src="demo-images/demo.gif" width="400"></img>
+  <img src="demo-images/demo.gif" width="300"></img>
 </p>
 
 ### Installing
