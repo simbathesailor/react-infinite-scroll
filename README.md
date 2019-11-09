@@ -2,7 +2,7 @@
 
 <h1  align="center">react-infinite-scroll </h1>
 
-<h3  align="center" color="#1d2123">A dead simple React infinite-scroll<h3>
+<h3  align="center" color="#1d2123">A dead simple React infinite-scroll</h3>
 
 </div>
 
