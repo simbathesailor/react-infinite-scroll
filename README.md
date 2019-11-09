@@ -3,6 +3,10 @@
 <h3>A dead simple React infinite-scroll<h3>
 </div>
 
+<p align="center">
+  <img src="demo-images/demo.gif"></img>
+</p>
+
 ### Installing
 
 ## Contributing

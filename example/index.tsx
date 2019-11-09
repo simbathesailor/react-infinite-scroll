@@ -45,6 +45,7 @@ function LoadMoreComponent() {
   return <h1>New Loader</h1>;
 }
 function App() {
+  const [offsetbottom, setOffsetBottom] = React.useState(0);
   const option = {
     rootMargin: '0px 0px 300px 0px',
     threshold: '0, 0.5, 1', // changed API to avoid passing array is passed by refernece
@@ -90,13 +91,55 @@ function App() {
     },
     [setActivePageInfo]
   );
+
+  function onChangeRadio(e) {
+    console.log(e.target.value);
+    setOffsetBottom(e.target.value);
+  }
   return (
     <div className="App">
       <h1>Scroll to see Infinite scroll in action</h1>
+      <h3>Offset</h3>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          marginBottom: '30px',
+          width: '80%',
+        }}
+      >
+        <div className="radio-item">
+          <input
+            type="radio"
+            name="gender"
+            value="0"
+            onChange={onChangeRadio}
+          />
+          <span>0</span>
+        </div>
+        <div className="radio-item">
+          <input
+            type="radio"
+            name="gender"
+            value="300"
+            onChange={onChangeRadio}
+          />
+          <span>300</span>
+        </div>
+        <div className="radio-item">
+          <input
+            type="radio"
+            name="gender"
+            value="600"
+            onChange={onChangeRadio}
+          />
+          <span>500</span>
+        </div>
+      </div>
       <InfiniteScroll
         callback={callbackForInfiniteScroll}
         options={{
-          rootMargin: '0px 0px 400px 0px',
+          rootMargin: `0px 0px ${offsetbottom}px 0px`,
         }}
       >
         {dataInfiniteScroll &&
