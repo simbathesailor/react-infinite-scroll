@@ -14,6 +14,7 @@ const defaultOptions = {
   when: true,
   visibilityCondition: defaultVisibilityCondition,
 };
+
 interface IOptions {
   rootMargin?: string;
   threshold?: string;
@@ -137,4 +138,4 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
  * https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#root-intersection-rectangle
  */
 
-export { useInfiniteScroll, InfiniteScroll };
+export { InfiniteScroll };
