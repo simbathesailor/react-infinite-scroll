@@ -3,11 +3,9 @@
 <h1  align="center">react-infinite-scroll </h1>
 
 <h3  align="center">A dead simple React infinite-scroll</h3>
-<p  align="center">
 
-<img  src="demo-images/demo.gif" width="300"></img>
+<img  src="demo-images/demo.gif" width="300"  align="center"></img>
 
-</p>
 </div>
 
 ### Installing
