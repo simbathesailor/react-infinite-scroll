@@ -53,8 +53,7 @@ function App() {
   };
   const [activePageInfo, setActivePageInfo] = React.useState(1);
   const [dataInfiniteScroll, setDataInfiniteScroll] = React.useState(null);
-  // const option = useOptionCreator(boxRef, documentRef);
-  // const [isVisible, boxElemCallback] = useIntersectionObserver(option);
+
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
   React.useEffect(() => {
@@ -94,7 +93,12 @@ function App() {
   return (
     <div className="App">
       <h1>Scroll to see Infinite scroll in action</h1>
-      <InfiniteScroll callback={callbackForInfiniteScroll}>
+      <InfiniteScroll
+        callback={callbackForInfiniteScroll}
+        options={{
+          rootMargin: '0px 0px 400px 0px',
+        }}
+      >
         {dataInfiniteScroll &&
           dataInfiniteScroll.map(elem => {
             return <Box key={elem.id} {...elem} />;
@@ -105,7 +109,11 @@ function App() {
 }
 
 /**
- * Need to update the scroll area lazy loading
+ * Infinite scroll in scrollable area : It will work for any scroll area,
+ * as per the findings, It looks like the intersection area is clipped if there is any overflow
+ * non-visible property. and hence the intersection area doesnot reach the viewport in that case
+ * Read 'Clipping and the intersection rectangle' section here:
+ * https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#root-intersection-rectangle
  */
 
 ReactDOM.render(<App />, document.getElementById('root'));

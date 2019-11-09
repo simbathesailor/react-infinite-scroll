@@ -53,7 +53,6 @@ interface IOptions {
   when?: boolean;
   callback?: Function;
   visibilityCondition?: (entry: IntersectionObserverEntry) => boolean;
-  notDefaultRoot?: boolean;
 }
 
 type useIntersectionObserverReturn = [boolean, any, any];
@@ -94,14 +93,10 @@ interface IRefFunctionCallback extends Function {
 function useIntersectionObserver(
   options: IOptions
 ): useIntersectionObserverReturn {
-  const {
-    rootMargin,
-    threshold,
-    when,
-    callback,
-    visibilityCondition,
-    notDefaultRoot,
-  } = { ...defaultOptions, ...options };
+  const { rootMargin, threshold, when, callback, visibilityCondition } = {
+    ...defaultOptions,
+    ...options,
+  };
   const [rootElemNew, setRootElemNew] = React.useState(null);
   const [boxElem, setBoxElem] = React.useState(null);
 
@@ -147,7 +142,6 @@ function useIntersectionObserver(
           type: 'SET_VISIBILITY',
           data: finalVisibilityFunction(entry),
         });
-
         // Each entry describes an intersection change for one observed
         // target element:
         //   entry.boundingClientRect
@@ -203,7 +197,7 @@ function useIntersectionObserver(
     const currentRootElem = rootElemNew;
     if (when) {
       let observer = new IntersectionObserver(callbackRef.current, {
-        root: notDefaultRoot ? currentRootElem : null,
+        root: currentRootElem || null,
         threshold: threshold.split(',').map(elem => parseFloat(elem)),
         rootMargin,
       });
@@ -218,15 +212,7 @@ function useIntersectionObserver(
         observerRef.current.unobserve(currentELem);
       }
     };
-  }, [
-    boxElem,
-    rootElemNew,
-    rootMargin,
-    when,
-    callbackRef,
-    threshold,
-    notDefaultRoot,
-  ]);
+  }, [boxElem, rootElemNew, rootMargin, when, callbackRef, threshold]);
   return [isVisible, boxElemCallback, rootCallbackRef];
 }
 
