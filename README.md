@@ -1,10 +1,19 @@
 <div>
 
 <h1  align="center">react-infinite-scroll </h1>
+
 <h3  align="center">A dead simple React infinite-scroll</h3>
 
 <p align="center">
-<img  src="demo-images/demo.gif" width="300"  align="center">
+  <img src="https://badgen.net/npm/v/@simbathesailor/react-infinite-scroll">
+   <img src="https://badgen.net/bundlephobia/minzip/@simbathesailor/react-infinite-scroll">
+    <img src="https://badgen.net/npm/dw/@simbathesailor/react-infinite-scroll">
+</p>
+
+<p  align="center">
+
+<img  src="demo-images/demo.gif"  width="300"  align="center">
+
 </p>
 
 </div>
@@ -14,18 +23,23 @@
 If using npm:
 
 ```sh
+
 npm i @simbathesailor/react-infinite-scroll --save
+
 ```
 
 If using yarn:
 
 ```sh
-yarn add  @simbathesailor/react-infinite-scroll
+
+yarn add @simbathesailor/react-infinite-scroll
+
 ```
 
 ## Demo
 
 [Demo App](https://7phl3.csb.app/)
+
 [Full Codesandbox Code](https://codesandbox.io/s/useintersectionobserver-7phl3)
 
 ## Usage
@@ -37,13 +51,19 @@ import InfiniteScroll from '@simbathesailor/react-infinite-scroll';
 
 function App() {
   // setting up the active page fetched, It can be any logic needed
+
   const [activePageInfo, setActivePageInfo] = React.useState(1);
+
   // This is data recieved till now, which will be rendered.
+
   const [dataInfiniteScroll, setDataInfiniteScroll] = React.useState(null);
 
   // Logic to execute to get the initial set of results
+
   // On mount of the component , we are making an API call to get
+
   // the initial set of results.
+
   React.useEffect(() => {
     fetch(
       `https://5da9aa08de10b40014f3745c.mockapi.io/api/v1/feed?page=1&limit=10`
@@ -51,21 +71,28 @@ function App() {
       .then(res => {
         return res.json();
       })
+
       .then(data => {
         setDataInfiniteScroll(data);
       });
   }, []);
 
   // Logic to execute when the reached the end of the scroll
-  // This is a callback which can be passed to InfiniteScroll component, The       callback
+
+  // This is a callback which can be passed to InfiniteScroll component, The callback
+
   // will recieve the isVisible value as true when we reach the end of the scroll.
+
   const callbackForInfiniteScroll = React.useCallback(
     isVisible => {
       let activePage;
+
       setActivePageInfo(c => {
         activePage = c;
+
         return c;
       });
+
       if (isVisible) {
         fetch(
           `https://5da9aa08de10b40014f3745c.mockapi.io/api/v1/feed?page=${activePage +
@@ -74,22 +101,29 @@ function App() {
           .then(res => {
             return res.json();
           })
+
           .then(data => {
             setDataInfiniteScroll(dataInState => [...dataInState, ...data]);
+
             setActivePageInfo(c => c + 1);
           });
       }
     },
+
     [setActivePageInfo]
   );
+
   return (
     <div className="App">
       <h1>Scroll to see Infinite scroll in action</h1>
+
       {/* Just need to pass the callback to invoke, when list reaches end */}
+
       <InfiniteScroll callback={callbackForInfiniteScroll}>
         {dataInfiniteScroll &&
           dataInfiniteScroll.map(elem => {
             /** Box is not a React element. It's a React component **/
+
             return <Box key={elem.id} {...elem} />;
           })}
       </InfiniteScroll>
@@ -98,10 +132,14 @@ function App() {
 }
 
 // It is important to use forwardRef when Components are not React Elements.
+
 // InfiniteScroll component takes the responsibility of initiliazing
-// the intersection observer for you.  ref should resolve to a DOM element
+
+// the intersection observer for you. ref should resolve to a DOM element
+
 const Box = React.forwardRef((props, ref) => {
   const { avatar, id, name } = props;
+
   return (
     <div ref={ref} className="box-item">
       <img
@@ -109,6 +147,7 @@ const Box = React.forwardRef((props, ref) => {
         src={avatar}
         alt="no-avatar"
       />
+
       <span>{name}</span>
     </div>
   );
@@ -118,12 +157,15 @@ const Box = React.forwardRef((props, ref) => {
 ### Scenario: When need to fetch new set of data with some offset at bottom of the page.
 
 Let' see only the changed code from above. Infinite scroll takes rootMargin as one of the option similar to intersection observer API. Hence any offset can be given as:
+
 rootMargin: "[topOffset], [rightOffset], [bottomOffset], [leftOffset]". Let's see the one of the example having a bottom offset of 680px.
 
 ```jsx
 <div className="App">
   <h1>Scroll to see Infinite scroll in action</h1>
+
   {/* Just need to pass the callback to invoke, when list reaches end */}
+
   <InfiniteScroll
     callback={callbackForInfiniteScroll}
     options={{
@@ -145,11 +187,13 @@ We can also give , top offset, left offset and right offset. So Infinite scroll 
 react-infinite-scroll is using **Intersection Observer API**. Hence very performant and slick. We can pass almost same options we pass for setting up intersection observer. Here is the link for [MDN Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#root-intersection-rectangle). You can read about it and understand why it is performant.
 
 The InfiniteScroll Component make use of useInfiniteScroll and useIntersectionObserver hook. React version above >16.8.6 can use this component for infinite scrolling.
+
 Plan is to bundle useIntersectionObserver as a separate package later.
 
 ## Work to do
 
 - TestCases.
+
 - Other examples
 
 ## Contributing
