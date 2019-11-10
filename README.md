@@ -196,6 +196,10 @@ Plan is to bundle useIntersectionObserver as a separate package later.
 
 - Other examples
 
+- Update readme with all the props InfiniteScroll component takes.
+
+- Example how to stop the infinite scroll and sending the custom components as Loader.
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
