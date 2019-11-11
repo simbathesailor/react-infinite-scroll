@@ -44,7 +44,7 @@ type JSXElementArray = React.ReactElement | React.ReactElement[];
 interface IPropsInfiniteScroll {
   callback?: (isVisible: boolean) => void;
   options?: IOptions;
-  LoadMoreComponent?: React.ReactType;
+  LoadMoreComponent?: React.ReactElement;
   whenInfiniteScroll?: boolean;
   children: JSX.Element[] | [];
 }
@@ -57,23 +57,27 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
   const {
     callback,
     options = defaultOptions,
-    LoadMoreComponent,
+    LoadMoreComponent = null,
     whenInfiniteScroll = true,
   } = props;
   let finalOptions = { ...defaultOptions, ...options };
-
+  const callbackRef = React.useRef(callback);
   const [boxElemCallback, isVisible] = useInfiniteScroll({
     ...finalOptions,
     when: whenInfiniteScroll,
   });
 
+  React.useEffect(() => {
+    callbackRef.current = callback;
+  });
+
   const callbackFixed = React.useCallback(
     isVisible => {
-      if (whenInfiniteScroll && callback) {
-        callback(isVisible);
+      if (whenInfiniteScroll && callbackRef.current) {
+        callbackRef.current(isVisible);
       }
     },
-    [callback, whenInfiniteScroll]
+    [callbackRef, whenInfiniteScroll]
   );
   React.useEffect(() => {
     if (callbackFixed && whenInfiniteScroll) {
@@ -117,7 +121,9 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
     finalReturnChildren = [
       ...finalReturnChildren,
       LoadMoreComponent ? (
-        <LoadMoreComponent key={Math.random()} />
+        React.cloneElement(LoadMoreComponent, {
+          key: Math.random(),
+        })
       ) : (
         <LoadingMore key={Math.random()} />
         /**
