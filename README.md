@@ -1,10 +1,7 @@
-<div>
-
-  <h1 align="center">react-infinite-scroll </h1>
-
+ <h1 align="center">react-infinite-scroll </h1>
   <h3 align="center">A dead simple React infinite-scroll</h3>
-
-  <p align="center">
+<div>
+<p align="center">
     <img src="https://badgen.net/npm/v/@simbathesailor/react-infinite-scroll">
     <img src="https://badgen.net/bundlephobia/minzip/@simbathesailor/react-infinite-scroll">
     <img src="https://badgen.net/npm/dw/@simbathesailor/react-infinite-scroll">
@@ -113,8 +110,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Scroll to see Infinite scroll in action</h1>
-
       {/* Just need to pass the callback to invoke, when list reaches end */}
 
       <InfiniteScroll callback={callbackForInfiniteScroll}>
