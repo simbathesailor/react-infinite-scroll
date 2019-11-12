@@ -1,20 +1,20 @@
 <div>
 
-<h1  align="center">react-infinite-scroll </h1>
+  <h1 align="center">react-infinite-scroll </h1>
 
-<h3  align="center">A dead simple React infinite-scroll</h3>
+  <h3 align="center">A dead simple React infinite-scroll</h3>
 
-<p align="center">
-  <img src="https://badgen.net/npm/v/@simbathesailor/react-infinite-scroll">
-   <img src="https://badgen.net/bundlephobia/minzip/@simbathesailor/react-infinite-scroll">
+  <p align="center">
+    <img src="https://badgen.net/npm/v/@simbathesailor/react-infinite-scroll">
+    <img src="https://badgen.net/bundlephobia/minzip/@simbathesailor/react-infinite-scroll">
     <img src="https://badgen.net/npm/dw/@simbathesailor/react-infinite-scroll">
-</p>
+  </p>
 
-<p  align="center">
+  <p align="center">
 
-<img  src="demo-images/demo.gif"  width="300"  align="center">
+    <img src="demo-images/demo.gif" width="300" align="center">
 
-</p>
+  </p>
 
 </div>
 
