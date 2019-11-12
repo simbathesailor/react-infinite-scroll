@@ -1,6 +1,6 @@
 # react-infinite-scroll
 
-## A dead simple React infinite-scroll</h3>
+### A dead simple React infinite-scroll</h3>
 
 <p align="center">
     <img src="https://badgen.net/npm/v/@simbathesailor/react-infinite-scroll">
