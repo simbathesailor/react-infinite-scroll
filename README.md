@@ -1,6 +1,6 @@
 # react-infinite-scroll
 
-# A dead simple React infinite-scroll
+### A dead simple React infinite-scroll
 
 <p align="center">
     <img src="https://badgen.net/npm/v/@simbathesailor/react-infinite-scroll">
@@ -8,9 +8,7 @@
     <img src="https://badgen.net/npm/dw/@simbathesailor/react-infinite-scroll">
   </p>
 
-  <p align="center">
    <img src="demo-images/demo.gif" width="300" align="center">
-  </p>
 
 ### Installing
 
