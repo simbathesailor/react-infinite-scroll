@@ -179,7 +179,7 @@ function useIntersectionObserver(
       return;
     }
     if (!when) {
-      if (observerRef.current && observerRef.current != null) {
+      if (observerRef.current && observerRef.current != null && boxElem) {
         observerRef.current.unobserve(boxElem);
       }
     }
