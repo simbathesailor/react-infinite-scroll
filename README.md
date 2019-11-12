@@ -7,7 +7,7 @@
     <img src="https://badgen.net/bundlephobia/minzip/@simbathesailor/react-infinite-scroll">
     <img src="https://badgen.net/npm/dw/@simbathesailor/react-infinite-scroll">
   </p>
-<p><img src="demo-images/demo.gif" width="300" align="center"></p>
+<p align="center"><img src="demo-images/demo.gif" width="300" align="center"></p>
 
 ### Installing
 
