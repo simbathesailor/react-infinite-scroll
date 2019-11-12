@@ -11,9 +11,7 @@
   </p>
 
   <p align="center">
-
-    <img src="demo-images/demo.gif" width="300" align="center">
-
+   <img src="demo-images/demo.gif" width="300" align="center">
   </p>
 
 </div>
