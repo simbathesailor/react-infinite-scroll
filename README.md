@@ -12,7 +12,7 @@
 
 #### ✅ Built on new flashy Reactjs hooks.
 
-#### ✅ No assumption on the layout, just wrap the content inside the InfiniteScroll component
+#### ✅ No assumption on the how you bring data, just wrap the content inside the InfiniteScroll component
 
 #### ✅ Uses Intersection Observer API, hence performant than regular ways of doing it
 
