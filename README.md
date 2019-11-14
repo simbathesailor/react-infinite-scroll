@@ -18,6 +18,8 @@
 
 #### ✅ Completely configurable. Can be used to trigger infinite scroll in any direction.
 
+#### ✅ Takes care of screen resizing
+
 #### ✅ Tiny (1.4kb gzipped)
 
 ### Installing
