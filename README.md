@@ -10,11 +10,15 @@
 
 <p align="center"><img src="demo-images/demo.gif" width="300" align="center"></p>
 
-✅ Built on new flashy Reactjs hooks.
-✅ No assumption on the layout, just wrap the content inside the InfiniteScroll component
-✅ Uses Intersection Observer API, hence performant than regular ways of doing it
-✅ Completely configurable. Can be used to trigger infinite scroll in any direction.
-✅ Tiny (1.4kb gzipped)
+#### ✅ Built on new flashy Reactjs hooks.
+
+#### ✅ No assumption on the layout, just wrap the content inside the InfiniteScroll component
+
+#### ✅ Uses Intersection Observer API, hence performant than regular ways of doing it
+
+#### ✅ Completely configurable. Can be used to trigger infinite scroll in any direction.
+
+#### ✅ Tiny (1.4kb gzipped)
 
 ### Installing
 
@@ -185,7 +189,7 @@ We can also give , top offset, left offset and right offset. So Infinite scroll 
 | callback           | Yes         | (isVisibile) => {<br> // Logic to trigger <br> // next set of data<br>} |                                                                                                             | A callback from consumer,<br>which gets isVisible boolean<br>as the argument.                                                                                                              |
 | options            | No          | object                                                                  | {<br>rootMargin: '0px 0px 0px 0px'<br>threshold: '0, 1'<br>when: true<br>visibilityCondition: Function<br>} | These are the almost same options,<br>which we pass to intersectionObserver<br>except threshold which is changed to string type.<br>Done for avoiding extra check for array<br>comparison. |
 | whenInfiniteScroll | No          | boolean                                                                 | true                                                                                                        | The flag which can be used to stop<br>infinitescroll behaviour, when false.<br>can be used to off when , data is no<br>more to be fetched.                                                 |
-| LoadMoreComponent  | No          | React.ReactElement                                                      | <h1>Loading More...</h1>                                                                                    | This is a ReactElement or React Component<br>which is shown when scroll reaches end                                                                                                        |
+| LoadMoreComponent  | No          | React.ReactElement                                                      | Loading More...                                                                                             | This is a ReactElement or React Component<br>which is shown when scroll reaches end                                                                                                        |
 
 ## Concept
 
