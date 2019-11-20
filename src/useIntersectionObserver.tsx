@@ -208,7 +208,7 @@ function useIntersectionObserver(
       }
     }
     return () => {
-      if (currentELem) {
+      if (currentELem && observerRef.current) {
         observerRef.current.unobserve(currentELem);
       }
     };
