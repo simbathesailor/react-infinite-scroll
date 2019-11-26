@@ -1,4 +1,4 @@
-# react-infinite-scroll 📜 📜
+# react-infinite-scroll 📜
 
 ### A dead simple React infinite-scroll</h3>
 
