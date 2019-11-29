@@ -8,14 +8,15 @@ import './styles.css';
  * forward ref is required as ref is needed on
  */
 const Box = React.forwardRef((props, ref) => {
-  const { avatar, id, name } = props;
+  const { avatar, id, name, typeScroll } = props;
   return (
     <div
       ref={ref}
       style={{
-        height: '300px',
-        width: '300px',
-        marginBottom: '40px',
+        minHeight: '300px',
+        minWidth: '300px',
+        marginBottom: typeScroll === 'horizontal' ? '0px' : '40px',
+        marginRight: typeScroll === 'horizontal' ? '20px' : '0px',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
@@ -46,6 +47,7 @@ function LoadMoreComponent() {
 }
 function App() {
   const [offsetbottom, setOffsetBottom] = React.useState(0);
+  const [typeScroll, setTypeScroll] = React.useState('vertical');
   const option = {
     rootMargin: '0px 0px 300px 0px',
     threshold: '0, 0.5, 1', // changed API to avoid passing array is passed by refernece
@@ -53,7 +55,15 @@ function App() {
     visibilityCondition,
   };
   const [activePageInfo, setActivePageInfo] = React.useState(1);
+  const [
+    activePageInfoHorizontal,
+    setActivePageInfoHorizontal,
+  ] = React.useState(1);
   const [dataInfiniteScroll, setDataInfiniteScroll] = React.useState(null);
+  const [
+    dataInfiniteScrollHorizontal,
+    setDataInfiniteScrollHorizontal,
+  ] = React.useState(null);
 
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
@@ -93,8 +103,11 @@ function App() {
   );
 
   function onChangeRadio(e) {
-    console.log(e.target.value);
     setOffsetBottom(e.target.value);
+  }
+
+  function onChangeRadioType(e) {
+    setTypeScroll(e.target.value);
   }
   return (
     <div className="App">
@@ -106,47 +119,98 @@ function App() {
           justifyContent: 'space-around',
           marginBottom: '30px',
           width: '80%',
+          flexDirection: 'column',
         }}
       >
-        <div className="radio-item">
-          <input
-            type="radio"
-            name="gender"
-            value="0"
-            onChange={onChangeRadio}
-          />
-          <span>0</span>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="radio-item">
+            <input
+              type="radio"
+              name="type-scroll"
+              value="vertical"
+              checked={typeScroll === 'vertical'}
+              onChange={onChangeRadioType}
+            />
+            <span>Vertical</span>
+          </div>
+          <div className="radio-item">
+            <input
+              type="radio"
+              name="type-scroll"
+              value="horizontal"
+              checked={typeScroll === 'horizontal'}
+              onChange={onChangeRadioType}
+            />
+            <span>Horizontal</span>
+          </div>
         </div>
-        <div className="radio-item">
-          <input
-            type="radio"
-            name="gender"
-            value="300"
-            onChange={onChangeRadio}
-          />
-          <span>300</span>
-        </div>
-        <div className="radio-item">
-          <input
-            type="radio"
-            name="gender"
-            value="600"
-            onChange={onChangeRadio}
-          />
-          <span>500</span>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="radio-item">
+            <input
+              type="radio"
+              name="gender"
+              value="0"
+              onChange={onChangeRadio}
+            />
+            <span>0</span>
+          </div>
+          <div className="radio-item">
+            <input
+              type="radio"
+              name="gender"
+              value="300"
+              onChange={onChangeRadio}
+            />
+            <span>300</span>
+          </div>
+          <div className="radio-item">
+            <input
+              type="radio"
+              name="gender"
+              value="600"
+              onChange={onChangeRadio}
+            />
+            <span>500</span>
+          </div>
         </div>
       </div>
-      <InfiniteScroll
-        callback={callbackForInfiniteScroll}
-        options={{
-          rootMargin: `0px 0px ${offsetbottom}px 0px`,
-        }}
-      >
-        {dataInfiniteScroll &&
-          dataInfiniteScroll.map(elem => {
-            return <Box key={elem.id} {...elem} />;
-          })}
-      </InfiniteScroll>
+      {typeScroll === 'vertical' && (
+        <InfiniteScroll
+          callback={callbackForInfiniteScroll}
+          options={{
+            rootMargin: `0px 0px ${offsetbottom}px 0px`,
+          }}
+        >
+          {dataInfiniteScroll &&
+            dataInfiniteScroll.map(elem => {
+              return <Box key={elem.id} {...elem} typeScroll={typeScroll} />;
+            })}
+        </InfiniteScroll>
+      )}
+
+      {typeScroll === 'horizontal' && (
+        <div
+          style={{
+            display: 'flex',
+            overflow: 'auto',
+            width: '100%',
+            padding: '40px 20px',
+            alignItems: 'center',
+          }}
+        >
+          <InfiniteScroll
+            callback={callbackForInfiniteScroll}
+            options={{
+              rootMargin: `0px 0px ${offsetbottom}px 0px`,
+            }}
+          >
+            {dataInfiniteScroll &&
+              dataInfiniteScroll.map(elem => {
+                return <Box key={elem.id} {...elem} typeScroll={typeScroll} />;
+              })}
+          </InfiniteScroll>
+        </div>
+      )}
     </div>
   );
 }

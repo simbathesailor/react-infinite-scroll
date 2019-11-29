@@ -1,10 +1,16 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  background: linear-gradient(0deg, #5134e2 15%, #05d5ff 70%, #a6ffcb 94%);
+}
 .App {
   font-family: sans-serif;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(0deg, #5134e2 15%, #05d5ff 70%, #a6ffcb 94%);
 }
 .box {
   position: relative;
@@ -13,4 +19,8 @@
   width: 200px;
   margin-bottom: 20px;
   background-color: aqua;
+}
+
+.radio-item * {
+  margin-right: 10px;
 }
