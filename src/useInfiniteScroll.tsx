@@ -53,6 +53,7 @@ interface IPropsInfiniteScroll {
  * InfiniteScroll
  * @param props Infinite scroll component which uses above custom hooks
  */
+
 function InfiniteScroll(props: IPropsInfiniteScroll) {
   const {
     callback,
@@ -61,7 +62,9 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
     whenInfiniteScroll = true,
   } = props;
   let finalOptions = { ...defaultOptions, ...options };
+
   const callbackRef = React.useRef(callback);
+
   const [boxElemCallback, isVisible] = useInfiniteScroll({
     ...finalOptions,
     when: whenInfiniteScroll,
@@ -79,6 +82,7 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
     },
     [callbackRef, whenInfiniteScroll]
   );
+
   React.useEffect(() => {
     if (callbackFixed && whenInfiniteScroll) {
       callbackFixed(isVisible);
@@ -95,6 +99,7 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
      * 1: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
      */
     let flattenChildren: JSX.Element[] = [];
+
     React.Children.forEach(props.children, child => {
       if (Array.isArray(child)) {
         flattenChildren = [...flattenChildren, ...child];

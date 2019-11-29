@@ -1,6 +1,7 @@
 // import 'react-app-polyfill/ie11';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import HorizontalScroll from './HorizontalScroll';
 import { InfiniteScroll } from '../.';
 import './styles.css';
 
@@ -55,16 +56,7 @@ function App() {
     visibilityCondition,
   };
   const [activePageInfo, setActivePageInfo] = React.useState(1);
-  const [
-    activePageInfoHorizontal,
-    setActivePageInfoHorizontal,
-  ] = React.useState(1);
   const [dataInfiniteScroll, setDataInfiniteScroll] = React.useState(null);
-  const [
-    dataInfiniteScrollHorizontal,
-    setDataInfiniteScrollHorizontal,
-  ] = React.useState(null);
-
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
   React.useEffect(() => {
@@ -189,27 +181,12 @@ function App() {
       )}
 
       {typeScroll === 'horizontal' && (
-        <div
-          style={{
-            display: 'flex',
-            overflow: 'auto',
-            width: '100%',
-            padding: '40px 20px',
-            alignItems: 'center',
-          }}
-        >
-          <InfiniteScroll
-            callback={callbackForInfiniteScroll}
-            options={{
-              rootMargin: `0px 0px ${offsetbottom}px 0px`,
-            }}
-          >
-            {dataInfiniteScroll &&
-              dataInfiniteScroll.map(elem => {
-                return <Box key={elem.id} {...elem} typeScroll={typeScroll} />;
-              })}
-          </InfiniteScroll>
-        </div>
+        <HorizontalScroll
+          typeScroll={typeScroll}
+          setTypeScroll={setTypeScroll}
+          offsetbottom={offsetbottom}
+          setOffsetBottom={setOffsetBottom}
+        />
       )}
     </div>
   );
