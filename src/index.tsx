@@ -1,6 +1,6 @@
 import { InfiniteScroll } from './useInfiniteScroll';
 
-module.exports = InfiniteScroll;
+export { InfiniteScroll };
 
 // export default InfiniteScroll;
 

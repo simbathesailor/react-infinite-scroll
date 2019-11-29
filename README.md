@@ -51,7 +51,7 @@ yarn add @simbathesailor/react-infinite-scroll
 ### Scenario: When need to fetch new set of data when scroll end is reached
 
 ```jsx
-import InfiniteScroll from '@simbathesailor/react-infinite-scroll';
+import { InfiniteScroll } from '@simbathesailor/react-infinite-scroll';
 
 function App() {
   // setting up the active page fetched, It can be any logic needed
