@@ -97,6 +97,20 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
      * flatten the children array
      * 0: {$$typeof: Symbol(react.element), type: "h1", key: null, ref: null, props: {…}, …}
      * 1: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+     * 
+     * In that case JSX will be like this : 
+     * 
+     * <Child>
+        <div>Hi</div>
+         <div>Hi</div>
+         <div>Hi</div>
+         {[1,2,3].map((elem, index) => {
+           return <div key={index}>{index}</div>
+         })}
+         <div>
+           
+          </div>
+      </Child>
      */
     let flattenChildren: JSX.Element[] = [];
 

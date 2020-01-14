@@ -171,6 +171,13 @@ function App() {
           callback={callbackForInfiniteScroll}
           options={{
             rootMargin: `0px 0px ${offsetbottom}px 0px`,
+            visibilityCondition: (entry: IntersectionObserverEntry) => {
+              if (entry.intersectionRatio >= 0.5) {
+                return true;
+              }
+              return false;
+            },
+            threshold: '0, 0.5, 1',
           }}
         >
           {dataInfiniteScroll &&
