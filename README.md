@@ -42,9 +42,9 @@ yarn add @simbathesailor/react-infinite-scroll
 
 ## Demo
 
-[Demo App](https://7phl3.csb.app/)
+[Demo App](https://nm7ls.csb.app/)
 
-[Full Codesandbox Code](https://codesandbox.io/s/useintersectionobserver-7phl3)
+[Full Codesandbox Code](https://codesandbox.io/s/useintersectionobserver-nm7ls)
 
 ## Usage
 
