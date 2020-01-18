@@ -20,7 +20,7 @@
 
 #### ✅ Takes care of screen resizing
 
-#### ✅ Tiny (1.4kb gzipped)
+#### ✅ Tiny (1.3kb gzipped)
 
 ### Installing
 
