@@ -1,6 +1,5 @@
 import React from 'react';
 import useRefCallback from './useRefCallback';
-import { IRefFunctionCallback } from './types';
 
 const initialState = {
   intersectionObj: {},
