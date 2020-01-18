@@ -90,6 +90,15 @@ const defaultOptions = {
 interface IRefFunctionCallback extends Function {
   current?: any;
 }
+
+function useRefCallback(): [null | HTMLElement, Function] {
+  const [elem, setELem] = React.useState(null);
+  const elemCallbackRef: IRefFunctionCallback = React.useCallback(elem => {
+    setELem(elem);
+    elemCallbackRef.current = elem;
+  }, []);
+  return [elem, elemCallbackRef];
+}
 function useIntersectionObserver(
   options: IOptions
 ): useIntersectionObserverReturn {
@@ -97,18 +106,8 @@ function useIntersectionObserver(
     ...defaultOptions,
     ...options,
   };
-  const [rootElemNew, setRootElemNew] = React.useState(null);
-  const [boxElem, setBoxElem] = React.useState(null);
-
-  const rootCallbackRef: IRefFunctionCallback = React.useCallback(elem => {
-    setRootElemNew(elem);
-    rootCallbackRef.current = elem;
-  }, []);
-
-  const boxElemCallback: IRefFunctionCallback = React.useCallback(elem => {
-    setBoxElem(elem);
-    boxElemCallback.current = elem;
-  }, []);
+  const [rootElemNew, rootCallbackRef] = useRefCallback();
+  const [boxElem, boxElemCallback] = useRefCallback();
 
   const [state, dispatch] = React.useReducer(
     IntersectionObserverReducer,
@@ -116,10 +115,11 @@ function useIntersectionObserver(
   );
 
   const { observerInState, isVisible } = state;
+
   const observerRef = React.useRef<any>(null);
   const callbackRef = React.useRef<any>(null);
 
-  const newCallbackDefault = React.useCallback(
+  const newCallbackDefault = React.useRef(
     (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       entries.forEach((entry: IntersectionObserverEntry) => {
         // setIntersectionObj(entry);
@@ -152,8 +152,7 @@ function useIntersectionObserver(
         //   entry.target
         //   entry.time
       });
-    },
-    [observerInState, visibilityCondition]
+    }
   );
   /**
    * Setting callback Ref
@@ -164,7 +163,7 @@ function useIntersectionObserver(
       return;
     }
     if (!callback) {
-      let callbackDefault = newCallbackDefault;
+      let callbackDefault = newCallbackDefault.current;
       callbackRef.current = callbackDefault;
     } else {
       callbackRef.current = callback;
