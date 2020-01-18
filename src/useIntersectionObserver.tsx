@@ -1,4 +1,5 @@
 import React from 'react';
+import useRefCallback from './useRefCallback';
 
 const initialState = {
   intersectionObj: {},
@@ -87,18 +88,18 @@ const defaultOptions = {
   visibilityCondition: defaultVisibilityCondition,
 };
 
-interface IRefFunctionCallback extends Function {
+export interface IRefFunctionCallback extends Function {
   current?: any;
 }
 
-function useRefCallback(): [null | HTMLElement, Function] {
-  const [elem, setELem] = React.useState(null);
-  const elemCallbackRef: IRefFunctionCallback = React.useCallback(elem => {
-    setELem(elem);
-    elemCallbackRef.current = elem;
-  }, []);
-  return [elem, elemCallbackRef];
-}
+// function useRefCallback(): [null | HTMLElement, Function] {
+//   const [elem, setELem] = React.useState(null);
+//   const elemCallbackRef: IRefFunctionCallback = React.useCallback(elem => {
+//     setELem(elem);
+//     elemCallbackRef.current = elem;
+//   }, []);
+//   return [elem, elemCallbackRef];
+// }
 function useIntersectionObserver(
   options: IOptions
 ): useIntersectionObserverReturn {
@@ -119,41 +120,46 @@ function useIntersectionObserver(
   const observerRef = React.useRef<any>(null);
   const callbackRef = React.useRef<any>(null);
 
-  const newCallbackDefault = React.useRef(
-    (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      entries.forEach((entry: IntersectionObserverEntry) => {
-        // setIntersectionObj(entry);
-        dispatch({
-          type: 'SETINTERSECTIONOBJ',
-          data: entry,
-        });
-        if (!observerInState) {
-          dispatch({
-            type: 'SETOBSERVERHANDLE',
-            data: observer,
-          });
-          // setObserver(observer);
-        }
-        let finalVisibilityFunction = defaultVisibilityCondition;
-        if (visibilityCondition) {
-          finalVisibilityFunction = visibilityCondition;
-        }
-        dispatch({
-          type: 'SET_VISIBILITY',
-          data: finalVisibilityFunction(entry),
-        });
-        // Each entry describes an intersection change for one observed
-        // target element:
-        //   entry.boundingClientRect
-        //   entry.intersectionRatio
-        //   entry.intersectionRect
-        //   entry.isIntersecting
-        //   entry.rootBounds
-        //   entry.target
-        //   entry.time
+  function callbackResolved(
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ): any {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      // setIntersectionObj(entry);
+      dispatch({
+        type: 'SETINTERSECTIONOBJ',
+        data: entry,
       });
-    }
-  );
+      if (!observerInState) {
+        dispatch({
+          type: 'SETOBSERVERHANDLE',
+          data: observer,
+        });
+        // setObserver(observer);
+      }
+      let finalVisibilityFunction = defaultVisibilityCondition;
+      if (visibilityCondition) {
+        finalVisibilityFunction = visibilityCondition;
+      }
+      dispatch({
+        type: 'SET_VISIBILITY',
+        data: finalVisibilityFunction(entry),
+      });
+      // Each entry describes an intersection change for one observed
+      // target element:
+      //   entry.boundingClientRect
+      //   entry.intersectionRatio
+      //   entry.intersectionRect
+      //   entry.isIntersecting
+      //   entry.rootBounds
+      //   entry.target
+      //   entry.time
+    });
+  }
+  const newCallbackDefault = React.useRef(callbackResolved);
+  React.useEffect(() => {
+    newCallbackDefault.current = callbackResolved;
+  });
   /**
    * Setting callback Ref
    */

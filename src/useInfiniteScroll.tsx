@@ -1,5 +1,6 @@
 import React from 'react';
 import useIntersectionObserver from './useIntersectionObserver';
+import useHotRefs from './useHotRefs';
 
 const defaultVisibilityCondition = (entry: IntersectionObserverEntry) => {
   if (entry.intersectionRatio >= 1) {
@@ -62,22 +63,18 @@ function InfiniteScroll(props: IPropsInfiniteScroll) {
     whenInfiniteScroll = true,
   } = props;
   let finalOptions = { ...defaultOptions, ...options };
-
-  const callbackRef = React.useRef(callback);
+  const [callbackRef] = useHotRefs(callback);
 
   const [boxElemCallback, isVisible] = useInfiniteScroll({
     ...finalOptions,
     when: whenInfiniteScroll,
   });
 
-  React.useEffect(() => {
-    callbackRef.current = callback;
-  });
-
   const callbackFixed = React.useCallback(
     isVisible => {
       if (whenInfiniteScroll && callbackRef.current) {
-        callbackRef.current(isVisible);
+        let currentFunction = callbackRef.current;
+        currentFunction(isVisible);
       }
     },
     [callbackRef, whenInfiniteScroll]
