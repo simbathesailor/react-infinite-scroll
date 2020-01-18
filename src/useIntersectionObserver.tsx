@@ -1,5 +1,6 @@
 import React from 'react';
 import useRefCallback from './useRefCallback';
+import { IRefFunctionCallback } from './types';
 
 const initialState = {
   intersectionObj: {},
@@ -87,10 +88,6 @@ const defaultOptions = {
   when: true,
   visibilityCondition: defaultVisibilityCondition,
 };
-
-export interface IRefFunctionCallback extends Function {
-  current?: any;
-}
 
 // function useRefCallback(): [null | HTMLElement, Function] {
 //   const [elem, setELem] = React.useState(null);
